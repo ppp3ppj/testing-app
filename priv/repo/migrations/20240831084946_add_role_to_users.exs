@@ -3,7 +3,7 @@ defmodule TestingApp.Repo.Migrations.AddRoleToUsers do
 
   def change do
     alter table (:users) do
-      add :role, :string, null: false, default: "admin"
+      add :role, :string, null: false, default: "client"
     end
   end
 end
