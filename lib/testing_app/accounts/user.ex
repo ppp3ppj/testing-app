@@ -9,7 +9,7 @@ defmodule TestingApp.Accounts.User do
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
 
-    field :role, Ecto.Enum, values: [:client, :admin]
+    field :global_role, Ecto.Enum, values: [:client, :admin]
 
     timestamps(type: :utc_datetime)
   end
@@ -46,7 +46,7 @@ defmodule TestingApp.Accounts.User do
 
   def registration_role_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :role])
+    |> cast(attrs, [:email, :password, :global_role])
     |> validate_email(opts)
     |> validate_password(opts)
   end

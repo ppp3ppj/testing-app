@@ -17,22 +17,22 @@ users = [
     email: "admin@admin.com",
     password: "341234123412",
     password_confirmation: "341234123412",
-    role: "admin"
+    global_role: "admin"
   },
   %{
     email: "client@client.com",
     password: "341234123412",
     password_confirmation: "341234123412",
-    role: "client"
+    global_role: "client"
   },
 ]
 
 for user_params <- users do
-  case user_params[:role] do
+  case user_params[:global_role] do
     "admin" ->
       case Accounts.register_user_role(user_params) do
         {:ok, user} ->
-          IO.puts("Inserted admin user: #{user.email} with role: #{user.role}")
+          IO.puts("Inserted admin user: #{user.email} with role: #{user.global_role}")
 
         {:error, changeset} ->
           IO.puts("Failed to insert admin user: #{inspect(changeset.errors)}")
@@ -41,7 +41,7 @@ for user_params <- users do
     "client" ->
       case Accounts.register_user(user_params) do
         {:ok, user} ->
-          IO.puts("Inserted client user: #{user.email} with role: #{user.role}")
+          IO.puts("Inserted client user: #{user.email} with role: #{user.global_role}")
 
         {:error, changeset} ->
           IO.puts("Failed to insert client user: #{inspect(changeset.errors)}")

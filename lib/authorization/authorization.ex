@@ -2,7 +2,7 @@ defmodule TestingApp.Authorization do
   alias TestingAppWeb.Router
 
   def authorized?(user, path, method, event \\ nil) when is_binary(path) do
-    role = user && user.role
+    role = user && user.global_role
     uri = URI.parse(path)
     method = String.upcase(method || "GET")
     info = Router.route_info(method, uri.path, uri.host)
