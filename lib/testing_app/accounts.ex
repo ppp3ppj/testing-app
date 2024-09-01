@@ -4,6 +4,7 @@ defmodule TestingApp.Accounts do
   """
 
   import Ecto.Query, warn: false
+  alias Hex.API.User
   alias TestingApp.Repo
 
   alias TestingApp.Accounts.{User, UserToken, UserNotifier}
@@ -77,6 +78,12 @@ defmodule TestingApp.Accounts do
   def register_user(attrs) do
     %User{}
     |> User.registration_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def register_user_role(attrs) do
+    %User{}
+    |> User.registration_role_changeset(attrs)
     |> Repo.insert()
   end
 

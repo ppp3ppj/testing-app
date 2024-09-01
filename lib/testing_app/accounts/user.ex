@@ -44,6 +44,13 @@ defmodule TestingApp.Accounts.User do
     |> validate_password(opts)
   end
 
+  def registration_role_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password, :role])
+    |> validate_email(opts)
+    |> validate_password(opts)
+  end
+
   defp validate_email(changeset, opts) do
     changeset
     |> validate_required([:email])
