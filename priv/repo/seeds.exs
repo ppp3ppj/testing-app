@@ -9,3 +9,43 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias TestingApp.Accounts
+
+users = [
+  %{
+    email: "admin@admin.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    role: "admin"
+  },
+  %{
+    email: "client@client.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    role: "client"
+  },
+]
+
+for user_params <- users do
+  case user_params[:role] do
+    "admin" ->
+      case Accounts.register_user_role(user_params) do
+        {:ok, user} ->
+          IO.puts("Inserted admin user: #{user.email} with role: #{user.role}")
+
+        {:error, changeset} ->
+          IO.puts("Failed to insert admin user: #{inspect(changeset.errors)}")
+      end
+
+    "client" ->
+      case Accounts.register_user(user_params) do
+        {:ok, user} ->
+          IO.puts("Inserted client user: #{user.email} with role: #{user.role}")
+
+        {:error, changeset} ->
+          IO.puts("Failed to insert client user: #{inspect(changeset.errors)}")
+      end
+  end
+end
+
