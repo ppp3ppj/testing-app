@@ -65,9 +65,14 @@ defmodule TestingAppWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live_session :require_authenticated_user,
-      on_mount: [{TestingAppWeb.UserAuth, :ensure_authenticated}] do
+      on_mount: [
+        {TestingAppWeb.UserAuth, :ensure_authenticated},
+        {TestingAppWeb.UserAuth, :ensure_authorized}
+      ] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+      live "/admin", AdminFactingLive, :index
+      live "/client", ClientFacingLive, :index
     end
   end
 
@@ -81,5 +86,9 @@ defmodule TestingAppWeb.Router do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
+  end
+
+  def route_info(method, path, host) do
+    Phoenix.Router.route_info(__MODULE__, method, path, host)
   end
 end

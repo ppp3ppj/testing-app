@@ -9,6 +9,8 @@ defmodule TestingApp.Accounts.User do
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
 
+    field :role, Ecto.Enum, values: [:client, :admin]
+
     timestamps(type: :utc_datetime)
   end
 

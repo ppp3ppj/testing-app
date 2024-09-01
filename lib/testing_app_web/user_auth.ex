@@ -1,5 +1,6 @@
 defmodule TestingAppWeb.UserAuth do
   use TestingAppWeb, :verified_routes
+  alias TestingApp.Authorization
 
   import Plug.Conn
   import Phoenix.Controller
@@ -162,6 +163,50 @@ defmodule TestingAppWeb.UserAuth do
 
       {:halt, socket}
     end
+  end
+
+  def on_mount(:ensure_authorized, _params, _session, socket) do
+    socket =
+      socket
+      |> Phoenix.LiveView.attach_hook(:auth_hook, :handle_params, fn _params, url, socket ->
+        %{assigns: %{current_user: current_user}} = socket
+
+        case Authorization.authorized?(current_user, url, "GET") do
+          true ->
+            socket =
+              socket
+              |> Phoenix.Component.assign(:live_url, url)
+
+            {:cont, socket}
+
+          false ->
+            socket =
+              socket
+              |> Phoenix.LiveView.put_flash(:error, "Not Authorized")
+              |> Phoenix.LiveView.redirect(to: ~p"/")
+
+            {:halt, socket}
+        end
+      end)
+      |> Phoenix.LiveView.attach_hook(:auth_hook_event, :handle_event, fn event,
+                                                                          _params,
+                                                                          socket ->
+        %{assigns: %{current_user: current_user, live_url: url}} = socket
+
+        case Authorization.authorized?(current_user, url, "GET", event) do
+          true ->
+            {:cont, socket}
+
+          false ->
+            socket =
+              socket
+              |> Phoenix.LiveView.put_flash(:error, "Not Authorized")
+
+            {:halt, socket}
+        end
+      end)
+
+    {:cont, socket}
   end
 
   def on_mount(:redirect_if_user_is_authenticated, _params, session, socket) do
