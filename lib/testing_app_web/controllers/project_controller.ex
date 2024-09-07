@@ -1,6 +1,7 @@
 defmodule TestingAppWeb.ProjectController do
   use TestingAppWeb, :controller
 
+  alias TestingApp.Users
   alias TestingApp.Projects
   alias TestingApp.Projects.Project
 
@@ -11,6 +12,8 @@ defmodule TestingAppWeb.ProjectController do
 
   def new(conn, _params) do
     current_user = conn.assigns[:current_user]
+    users = Users.list_client_users()
+    IO.inspect(users, label: "Changeset: ")
 
     changeset = Projects.change_project(%Project{})
     render(conn, :new, changeset: changeset, current_user: current_user)
