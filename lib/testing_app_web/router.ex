@@ -73,6 +73,8 @@ defmodule TestingAppWeb.Router do
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/admin", AdminFactingLive, :index
       live "/client", ClientFacingLive, :index
+
+      resources "/projects", ProjectController
     end
   end
 
