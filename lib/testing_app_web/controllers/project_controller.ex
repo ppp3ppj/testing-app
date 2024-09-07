@@ -10,8 +10,10 @@ defmodule TestingAppWeb.ProjectController do
   end
 
   def new(conn, _params) do
+    current_user = conn.assigns[:current_user]
+
     changeset = Projects.change_project(%Project{})
-    render(conn, :new, changeset: changeset)
+    render(conn, :new, changeset: changeset, current_user: current_user)
   end
 
   def create(conn, %{"project" => project_params}) do

@@ -4,6 +4,15 @@
   </.error>
   <.input field={f[:name]} type="text" label="Name" />
   <.input field={f[:description]} type="text" label="Description" />
+  <.input
+    type="select"
+    label="User"
+    field={f[:description]}
+    options={[{"Luke", "1"}, {"Leia", "2"}]}
+  />
+
+  <%= @current_user.email %>
+
   <:actions>
     <.button>Save Project</.button>
   </:actions>
