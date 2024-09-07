@@ -20,7 +20,43 @@ users = [
     global_role: "admin"
   },
   %{
+    email: "admin2@admin.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    global_role: "admin"
+  },
+  %{
     email: "client@client.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    global_role: "client"
+  },
+  %{
+    email: "client1@client.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    global_role: "client"
+  },
+  %{
+    email: "client2@client.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    global_role: "client"
+  },
+  %{
+    email: "client3@client.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    global_role: "client"
+  },
+  %{
+    email: "client4@client.com",
+    password: "341234123412",
+    password_confirmation: "341234123412",
+    global_role: "client"
+  },
+  %{
+    email: "client5@client.com",
     password: "341234123412",
     password_confirmation: "341234123412",
     global_role: "client"

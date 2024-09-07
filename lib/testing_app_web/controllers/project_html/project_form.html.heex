@@ -8,10 +8,8 @@
     type="select"
     label="User"
     field={f[:description]}
-    options={[{"Luke", "1"}, {"Leia", "2"}]}
+    options={Enum.map(@users, &{&1.email, &1.id})}
   />
-
-  <%= @current_user.email %>
 
   <:actions>
     <.button>Save Project</.button>

@@ -16,7 +16,7 @@ defmodule TestingAppWeb.ProjectController do
     IO.inspect(users, label: "Changeset: ")
 
     changeset = Projects.change_project(%Project{})
-    render(conn, :new, changeset: changeset, current_user: current_user)
+    render(conn, :new, changeset: changeset, current_user: current_user, users: users)
   end
 
   def create(conn, %{"project" => project_params}) do

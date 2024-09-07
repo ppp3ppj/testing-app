@@ -9,6 +9,7 @@ defmodule TestingAppWeb.ProjectHTML do
   attr :changeset, Ecto.Changeset, required: true
   attr :action, :string, required: true
   attr :current_user, TestingApp.Accounts.User, required: true
+  attr :users, :list, default: []
 
   def project_form(assigns)
 end
