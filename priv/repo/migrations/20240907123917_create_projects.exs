@@ -5,7 +5,7 @@ defmodule TestingApp.Repo.Migrations.CreateProjects do
     create table(:projects) do
       add :name, :string
       add :description, :text
-      add :created_by_id, references(:user, on_delete: :nothing)
+      add :created_by_id, references(:users, on_delete: :nothing)
 
       timestamps(type: :utc_datetime)
     end

@@ -15,6 +15,11 @@ defmodule TestingAppWeb.ProjectController do
   end
 
   def create(conn, %{"project" => project_params}) do
+    current_user = conn.assigns[:current_user]
+
+    # Add the `created_by_id` to the project_params
+    project_params = Map.put(project_params, "created_by_id", current_user.id)
+
     case Projects.create_project(project_params) do
       {:ok, project} ->
         conn
