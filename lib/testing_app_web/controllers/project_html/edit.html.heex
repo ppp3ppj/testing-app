@@ -3,6 +3,6 @@
   <:subtitle>Use this form to manage project records in your database.</:subtitle>
 </.header>
 
-<.project_form changeset={@changeset} action={~p"/projects/#{@project}"} />
+<.project_form changeset={@changeset} action={~p"/projects/#{@project}"} users={@users}/>
 
 <.back navigate={~p"/projects"}>Back to projects</.back>

@@ -7,7 +7,8 @@
   <.input
     type="select"
     label="User"
-    field={f[:description]}
+    field={f[:created_by_id]}
+    value={Ecto.Changeset.get_field(@changeset, :created_by_id) || @current_user.id}
     options={Enum.map(@users, &{&1.email, &1.id})}
   />
 
